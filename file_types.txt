@@ -1,0 +1,10 @@
+vhd
+mp3
+wav
+jpg
+gif
+pdf
+doc
+vmdk
+vdi
+iso
