@@ -22,18 +22,27 @@ if [ "$MYVOLUME" = "" ]; then
 fi 
 
 if [ $3 ]; then
-  FILETYPE=$3
-  echo "looking for file type: $FILETYPE in $MYPATH"
-  find -H -P $MYPATH -iname "*.$FILETYPE" | while read p; do 
-    echo $p 
-    md5sum  "$p"  >> ./md5list-$MYVOLUME.txt; done
-  exit
+    FILETYPE=$3
+    echo "looking for file type: $FILETYPE in $MYPATH"
+    find -H -P $MYPATH -iname "*.$FILETYPE" | while read p; do
+        echo $p
+        md5sum  "$p"  >> ./md5list-$MYVOLUME.txt; done
+        exit
 else
-  echo "looking for all file types in $MYPATH"
-  find -H -P "$MYPATH" | while read p; do  
-    md5sum  "$p"  >> ./md5list-$MYVOLUME.txt; done
-  exit
+    # adding this option, to override option to hash all files
+    # will use file type list instead.
+    IFS=$'\n' read -d '' -r -a  fileTypeArray < "file_types.txt"
+    echo "${fileTypeArray[@]}"
+    for i in "${fileTypeArray[@]}"
+        do
+            FILETYPE=${fileTypeArray[$i]}
+            echo "looking for file type: $FILETYPE in $MYPATH"
+            find -H -P $MYPATH -iname "*.$FILETYPE" | while read p; do
+            echo $p
+            md5sum  "$p"  >> ./md5list-$MYVOLUME.txt; done
+        done
+#echo "right before exit"
+    exit
 fi
-  
 
-EOF
+#  this loop isn't looping for some reason.
