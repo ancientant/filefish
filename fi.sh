@@ -32,17 +32,13 @@ else
     # adding this option, to override option to hash all files
     # will use file type list instead.
     IFS=$'\n' read -d '' -r -a  fileTypeArray < "file_types.txt"
-    echo "${fileTypeArray[@]}"
     for i in "${fileTypeArray[@]}"
-        do
-            FILETYPE=${fileTypeArray[$i]}
-            echo "looking for file type: $FILETYPE in $MYPATH"
-            find -H -P $MYPATH -iname "*.$FILETYPE" | while read p; do
-            echo $p
-            md5sum  "$p"  >> ./md5list-$MYVOLUME.txt; done
-        done
-#echo "right before exit"
+    do
+        FILETYPE=$i
+        echo "looking for file type: $FILETYPE in $MYPATH"
+        find -H -P $MYPATH -iname "*.$FILETYPE" | while read p; do
+        echo $p
+        md5sum  "$p"  >> ./md5list-$MYVOLUME.txt; done
+    done
     exit
 fi
-
-#  this loop isn't looping for some reason.
