@@ -26,12 +26,12 @@ if [ $3 ]; then
   echo "looking for file type: $FILETYPE in $MYPATH"
   find -H -P $MYPATH -iname "*.$FILETYPE" | while read p; do 
     echo $p 
-    md5sum  "$p"  >> /fitool/md5list-$MYVOLUME.txt; done
+    md5sum  "$p"  >> ./md5list-$MYVOLUME.txt; done
   exit
 else
   echo "looking for all file types in $MYPATH"
   find -H -P "$MYPATH" | while read p; do  
-    md5sum  "$p"  >> /fitool/md5list-$MYVOLUME.txt; done
+    md5sum  "$p"  >> ./md5list-$MYVOLUME.txt; done
   exit
 fi
   

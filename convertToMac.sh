@@ -7,4 +7,4 @@
 #
 
 
-sed 's/md5 /md5sum /' "fi.sh" > "fi.sh"
+sed 's/md5sum /md5 /' "fi.sh" > "macfi.sh"
