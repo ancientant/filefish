@@ -26,7 +26,7 @@ if [ $3 ]; then
     echo "looking for file type: $FILETYPE in $MYPATH"
     find -H -P $MYPATH -iname "*.$FILETYPE" | while read p; do
         echo $p
-        md5sum  "$p"  >> ./md5list-$MYVOLUME.txt; done
+        md5  "$p"  >> ./md5list-$MYVOLUME.txt; done
         exit
 else
     # adding this option, to override option to hash all files
@@ -38,7 +38,7 @@ else
         echo "looking for file type: $FILETYPE in $MYPATH"
         find -H -P $MYPATH -iname "*.$FILETYPE" | while read p; do
         echo $p
-        md5sum  "$p"  >> ./md5list-$MYVOLUME.txt; done
+        md5  "$p"  >> ./md5list-$MYVOLUME.txt; done
     done
     exit
 fi
